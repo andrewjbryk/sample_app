@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "Static pages" do
 
   subject { page }
-  
+
   describe "Home page" do
     before { visit root_path }
 
@@ -11,7 +11,7 @@ describe "Static pages" do
     it { should have_selector('title', text: full_title('')) }
     it { should_not have_selector 'title', text: '| Home' }
 
-  describe "for signed-in users" do
+    describe "for signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
       before do
         FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
@@ -37,8 +37,9 @@ describe "Static pages" do
         it { should have_link("1 followers", href: followers_user_path(user)) }
       end
     end
+  end
 
-      describe "Help page" do
+  describe "Help page" do
     before { visit help_path }
 
     it { should have_selector('h1',    text: 'Help') }
@@ -59,7 +60,7 @@ describe "Static pages" do
     it { should have_selector('title', text: full_title('Contact')) }
   end
 
-it "should have the right links on the layout" do
+  it "should have the right links on the layout" do
     visit root_path
     click_link "About"
     page.should have_selector 'title', text: full_title('About Us')
@@ -73,5 +74,4 @@ it "should have the right links on the layout" do
     click_link "sample app"
     page.should have_selector 'h1', text: 'Sample App'
   end
-end
 end
